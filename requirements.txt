@@ -1,0 +1,17 @@
+aiohttp==3.9.0
+aioredis==2.0.1
+asyncpg==0.28.0
+boto3==1.28.65
+celery==5.3.4
+fastapi==0.101.1
+langchain==0.0.334
+numpy==1.26.0
+pandas==2.1.1
+pydantic==2.3.0
+python-dotenv==1.0.0
+scikit-learn==1.3.0
+sqlalchemy==2.0.21
+tenacity==8.2.3
+torch==2.0.1
+transformers==4.34.0
+uvicorn==0.23.2

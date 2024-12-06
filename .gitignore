@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.python-version
+.env
+.venv/
+
+# Data
+data/processed/
+data/cache/
+
+# Models
+models/weights/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
+
+# Local
+*.local
