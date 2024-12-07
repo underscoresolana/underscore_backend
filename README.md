@@ -1,9 +1,9 @@
-# UnderScore - Solana Token Analyzer
 
-## Features
-- AI-powered token analysis
+
 - Real-time transaction monitoring
-- Risk assessment models
 - LLM integration
-
+- AI-powered token analysis
+## Features
+# UnderScore - Solana Token Analyzer
+- Risk assessment models
 ## Quick Start
