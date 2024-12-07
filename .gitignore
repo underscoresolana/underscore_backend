@@ -3,16 +3,16 @@ __pycache__/
 *.py[cod]
 .python-version
 .env
-.venv/
 
-# Data
-data/processed/
+models/weights/
+# IDE
 data/cache/
 
-# Models
-models/weights/
 
-# IDE
+data/processed/
+# Data
+.venv/
+# Models
 .vscode/
 .idea/
 
