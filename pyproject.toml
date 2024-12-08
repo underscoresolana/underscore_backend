@@ -1,0 +1,25 @@
+[project]
+name = "under__score"
+version = "2.1.0"
+description = "AI Infrastructure Token Analyzer for Solana"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "UnderScore Team", email = "dev@under-score.io"}]
+
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest]
+asyncio_mode = "auto"
+filterwarnings = ["error"]
+
+[tool.mypy]
+strict = true
+disallow_any_generics = true
+warn_return_any = true
+check_untyped_defs = true
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
