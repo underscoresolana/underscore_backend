@@ -1,0 +1,41 @@
+openapi: 3.0.3
+info:
+  title: UnderScore Analysis API
+  version: 2.1.0
+  description: AI-powered Solana token analysis service
+
+paths:
+  /analyze:
+    post:
+      summary: Analyze token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalysisRequest'
+      responses:
+        '200':
+          description: Analysis results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenAnalysisResult'
+
+components:
+  schemas:
+    AnalysisRequest:
+      type: object
+      properties:
+        token_address:
+          type: string
+          example: "FNsd3...a5Bd"
+    RiskAssessment:
+      type: object
+      properties:
+        score:
+          type: number
+          format: float
+        category:
+          type: string
+          enum: [low, medium, high]
