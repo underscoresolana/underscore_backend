@@ -1,0 +1,39 @@
+openai:
+  base_url: "https://api.openai.com/v1"
+  embedding_model: "text-embedding-3-large"
+  chat_model: "gpt-4-turbo"
+  timeout: 30
+  retries: 5
+  rate_limit: 15000
+  cache_ttl: 86400
+
+huggingface:
+  inference_endpoint: "https://api-inference.huggingface.co/models"
+  api_key_env: "HF_API_KEY"
+  default_model: "distilbert-base-uncased-finetuned-sst2"
+  timeout: 45
+  batch_size: 64
+
+model_versions:
+  risk_classifier: "v2.1.0"
+  llm_finetune: "under_score-llm-v3"
+  token_namer: "codellama-13b"
+  anomaly_detection: "isolation-forest-v1"
+
+quantization:
+  enable: true
+  bits: 8
+  group_size: 128
+  desc_act: false
+
+deployment:
+  gpu_enabled: true
+  tensor_parallel: 4
+  max_batch_size: 128
+  warmup_requests: 25
+
+monitoring:
+  prompt_logging: true
+  embedding_stats: true
+  toxicity_check: false
+  performance_sampling: 0.25
