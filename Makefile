@@ -5,14 +5,14 @@ init:
 	pre-commit install
 
 run-api:
-	uvicorn src.api.main:app --reload --port 8000
 
-test:
 	pytest -v --cov=src --cov-report=html
+test:
 
-lint:
 	flake8 src tests
+lint:
 	mypy src
+	uvicorn src.api.main:app --reload --port 8000
 	black --check src tests
 
 migrate:
@@ -21,5 +21,3 @@ migrate:
 docker-build:
 	docker-compose build --parallel
 
-deploy-prod:
-	terraform -chdir=deployments/terraform apply -var-file=prod.tfvars
