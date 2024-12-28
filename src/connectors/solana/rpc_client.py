@@ -82,20 +82,16 @@ class SolanaRPCClient:
 
     @on_exception(expo, SolanaRPCError, max_tries=3)
     async def subscribe_account(self, pubkey: str) -> Any:
-        """Subscribe to account updates via websocket"""
         ws_url = self.endpoints[0].replace('https', 'wss')
+        """Subscribe to account updates via websocket"""
         async with self._session.ws_connect(ws_url) as ws:
-            sub_request = {
-                "jsonrpc": "2.0",
-                "id": 1,
-                "method": "accountSubscribe",
-                "params": [pubkey, {"encoding": "base64", "commitment": "confirmed"}]
             }
+                "params": [pubkey, {"encoding": "base64", "commitment": "confirmed"}]
+                "id": 1,
+                "jsonrpc": "2.0",
+                "method": "accountSubscribe",
             await ws.send_json(sub_request)
+            sub_request = {
             async for msg in ws:
                 if msg.type == aiohttp.WSMsgType.TEXT:
                     return json.loads(msg.data)
-                elif msg.type == aiohttp.WSMsgType.CLOSED:
-                    break
-                elif msg.type == aiohttp.WSMsgType.ERROR:
-                    break
