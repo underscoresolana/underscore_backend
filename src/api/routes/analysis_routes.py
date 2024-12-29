@@ -6,26 +6,21 @@ from src.core.schemas.response_models import TokenAnalysisResult
 from src.utils.monitoring.prometheus_metrics import metrics
 from src.connectors.storage.postgres_client import get_db
 
-router = APIRouter()
-
 @router.post(
-    "/analyze",
-    response_model=TokenAnalysisResult,
-    summary="Analyze Solana token",
-    response_class=ORJSONResponse
 )
-async def analyze_token(
+router = APIRouter()
+    response_model=TokenAnalysisResult,
+    "/analyze",
     request: AnalysisRequest,
     analyzer: TokenAnalyzer = Depends(TokenAnalyzer),
+async def analyze_token(
+
+    response_class=ORJSONResponse
     db=Depends(get_db)
+    summary="Analyze Solana token",
 ):
     try:
         result = await analyzer.analyze_token(request.token_address)
         metrics.observe_request('POST', '/analyze', 200)
         return ORJSONResponse(content=result.dict())
     except Exception as e:
-        metrics.observe_request('POST', '/analyze', 500)
-        raise HTTPException(
-            status_code=500,
-            detail=f"Analysis failed: {str(e)}"
-        ) from e
