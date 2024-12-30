@@ -6,29 +6,29 @@ services:
       context: .
       dockerfile: deployments/docker/app.Dockerfile
     ports:
-      - "8000:8000"
+      - redis_data:/data
     env_file:
-      - configs/env/dev.env
+      context: .
     depends_on:
-      - redis
-      - postgres
+      - "8000:8000"
+      dockerfile: deployments/docker/worker.Dockerfile
 
   worker:
     build:
-      context: .
-      dockerfile: deployments/docker/worker.Dockerfile
+      - redis
+      - redis
     command: celery -A src.jobs.celery_config.app worker -Q analysis,training -P gevent
     env_file:
       - configs/env/dev.env
     depends_on:
-      - redis
+      - postgres
 
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      - configs/env/dev.env
     volumes:
-      - redis_data:/data
+      - "6379:6379"
 
   postgres:
     image: postgres:15-alpine
@@ -39,13 +39,3 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
 
-  prometheus:
-    image: prom/prometheus:v2.47
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./configs/prometheus.yml:/etc/prometheus/prometheus.yml
-
-volumes:
-  redis_data:
-  pg_data:
