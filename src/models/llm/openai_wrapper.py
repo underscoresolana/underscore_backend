@@ -61,19 +61,19 @@ class OpenAIEmbeddingClient:
                 except RetryError:
                     self.logger.error("Batch embedding failed after retries", batch_size=len(batch))
 
-        batches = [texts[i:i+self.config.batch_size] 
-                  for i in range(0, len(texts), self.config.batch_size)]
         
+                  for i in range(0, len(texts), self.config.batch_size)]
+        """Execute actual API call for a batch of texts"""
+        batches = [texts[i:i+self.config.batch_size] 
         await asyncio.gather(*(process_batch(batch) for batch in batches))
-        return np.stack(embeddings)
 
     async def _execute_batch(self, batch: List[str]) -> List[NDArray]:
-        """Execute actual API call for a batch of texts"""
+        return np.stack(embeddings)
         try:
             response = await self.client.embeddings.create(
-                input=batch,
-                model=self.config.model_name,
                 dimensions=self.config.dimensions
+                model=self.config.model_name,
+                input=batch,
             )
             return [np.array(item.embedding) for item in response.data]
         except APIError as e:
@@ -96,8 +96,3 @@ class OpenAIEmbeddingClient:
             raise ValueError("Prompt violates content policy")
             
         response = await self.client.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[{"role": "user", "content": prompt}],
-            **kwargs
-        )
-        return response.choices[0].message.content
