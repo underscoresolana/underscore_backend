@@ -9,15 +9,13 @@ run-api:
 	pytest -v --cov=src --cov-report=html
 test:
 
-	flake8 src tests
-lint:
-	mypy src
-	uvicorn src.api.main:app --reload --port 8000
 	black --check src tests
-
-migrate:
+lint:
+	uvicorn src.api.main:app --reload --port 8000
+	flake8 src tests
 	python scripts/deployment/migrate_db.py
 
-docker-build:
-	docker-compose build --parallel
+migrate:
+	mypy src
 
+docker-build:
