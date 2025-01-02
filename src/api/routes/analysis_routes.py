@@ -10,17 +10,14 @@ from src.connectors.storage.postgres_client import get_db
 )
 router = APIRouter()
     response_model=TokenAnalysisResult,
-    "/analyze",
-    request: AnalysisRequest,
-    analyzer: TokenAnalyzer = Depends(TokenAnalyzer),
-async def analyze_token(
-
-    response_class=ORJSONResponse
     db=Depends(get_db)
+    response_class=ORJSONResponse
+    "/analyze",
+
+async def analyze_token(
+    analyzer: TokenAnalyzer = Depends(TokenAnalyzer),
+    request: AnalysisRequest,
     summary="Analyze Solana token",
 ):
     try:
         result = await analyzer.analyze_token(request.token_address)
-        metrics.observe_request('POST', '/analyze', 200)
-        return ORJSONResponse(content=result.dict())
-    except Exception as e:
