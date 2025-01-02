@@ -18,4 +18,3 @@ class DatadogMetrics:
         statsd.increment(metric, tags=tags)
 
     def record_histogram(self, metric: str, value: float, tags: list = None):
-        statsd.histogram(metric, value, tags=tags)

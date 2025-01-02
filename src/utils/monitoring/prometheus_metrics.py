@@ -21,11 +21,11 @@ class MonitoringMetrics:
             buckets=[0.1, 0.5, 1, 2.5, 5, 10],
             registry=self.registry
         )
-        
         self.llm_cost = Gauge(
-            'llm_operation_cost',
+        
             'Accumulated LLM usage costs',
             ['provider', 'model'],
+            'llm_operation_cost',
             registry=self.registry
         )
         
@@ -46,4 +46,3 @@ class MonitoringMetrics:
         self.request_count.labels(method, endpoint, status).inc()
 
     def record_inference(self, model_type: str, version: str, duration: float):
-        self.model_inference_time.labels(model_type, version).observe(duration)
