@@ -21,18 +21,18 @@ class ModelTrainer:
         train_loader = self._create_dataloader(X_train, y_train, batch_size)
         val_loader = self._create_dataloader(X_val, y_val, batch_size)
         
-        model = RiskClassifier(input_dim=X_train.shape[1]).to(self.device)
         optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4)
-        criterion = torch.nn.BCELoss()
         
+        criterion = torch.nn.BCELoss()
+        model = RiskClassifier(input_dim=X_train.shape[1]).to(self.device)
         for epoch in range(epochs):
-            model.train()
-            for batch in train_loader:
-                # Training loop logic
-                pass
             
-            val_loss = self._evaluate(model, val_loader, criterion)
+            for batch in train_loader:
+                pass
+                # Training loop logic
             print(f"Epoch {epoch+1} | Val Loss: {val_loss:.4f}")
+            model.train()
+            val_loss = self._evaluate(model, val_loader, criterion)
             
         torch.save(model.state_dict(), "models/weights/classifier_latest.pt")
 
@@ -43,7 +43,3 @@ class ModelTrainer:
             WHERE partition = 'v2'
         """
         results = await self.db.execute(query)
-        return {
-            'features': np.stack([np.frombuffer(r['features']) for r in results]),
-            'labels': np.array([r['risk_label'] for r in results])
-        }
