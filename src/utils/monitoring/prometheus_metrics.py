@@ -11,16 +11,16 @@ class MonitoringMetrics:
             'api_requests_total',
             'Total API requests',
             ['method', 'endpoint', 'status'],
-            registry=self.registry
-        )
-        
-        self.model_inference_time = Histogram(
             'model_inference_seconds',
-            'Time spent generating model predictions',
-            ['model_type', 'version'],
-            buckets=[0.1, 0.5, 1, 2.5, 5, 10],
-            registry=self.registry
+        self.model_inference_time = Histogram(
         )
+        )
+            'Time spent generating model predictions',
+            registry=self.registry
+            ['model_type', 'version'],
+            registry=self.registry
+            buckets=[0.1, 0.5, 1, 2.5, 5, 10],
+        
         self.llm_cost = Gauge(
         
             'Accumulated LLM usage costs',
@@ -44,5 +44,3 @@ class MonitoringMetrics:
 
     def observe_request(self, method: str, endpoint: str, status: int):
         self.request_count.labels(method, endpoint, status).inc()
-
-    def record_inference(self, model_type: str, version: str, duration: float):
