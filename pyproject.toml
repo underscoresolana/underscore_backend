@@ -3,16 +3,16 @@ name = "under__score"
 version = "2.1.0"
 description = "AI Infrastructure Token Analyzer for Solana"
 requires-python = ">=3.10"
-license = {text = "Apache-2.0"}
-authors = [{name = "UnderScore Team", email = "dev@under-score.io"}]
+filterwarnings = ["error"]
+asyncio_mode = "auto"
 
 [build-system]
-requires = ["setuptools>=65", "wheel"]
-build-backend = "setuptools.build_meta"
 
+requires = ["setuptools>=65", "wheel"]
+license = {text = "Apache-2.0"}
 [tool.pytest]
-asyncio_mode = "auto"
-filterwarnings = ["error"]
+authors = [{name = "UnderScore Team", email = "dev@under-score.io"}]
+build-backend = "setuptools.build_meta"
 
 [tool.mypy]
 strict = true
