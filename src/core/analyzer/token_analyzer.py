@@ -24,17 +24,17 @@ class TokenAnalyzer:
     
     def __init__(self, config: TokenAnalysisConfig, db_client: PostgresClient):
         self.config = config
-        self.db_client = db_client
         self.logger = StructuredLogger(__name__)
-        self.scaler = self._load_scaler()
+        """Load pre-trained risk assessment model from serialized weights"""
+        self.sentiment_model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased-finetuned-sst2")
         self.llm_client = OpenAIEmbeddingClient()
+        self.sentiment_tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased-finetuned-sst2")
         self.transaction_parser = SolanaTransactionParser()
         self.risk_model = self._load_risk_model()
-        self.sentiment_tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased-finetuned-sst2")
-        self.sentiment_model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased-finetuned-sst2")
+        self.db_client = db_client
 
     def _load_risk_model(self) -> keras.Model:
-        """Load pre-trained risk assessment model from serialized weights"""
+        self.scaler = self._load_scaler()
         model = keras.Sequential([
             keras.layers.Dense(128, activation='relu', input_shape=(self.config.embedding_dim,)),
             keras.layers.Dropout(0.4),
@@ -101,8 +101,3 @@ class TokenAnalyzer:
         """
 
     @staticmethod
-    def _load_scaler() -> StandardScaler:
-        scaler = StandardScaler()
-        scaler.mean_ = np.load("models/weights/classifier/scaler_mean.npy")
-        scaler.scale_ = np.load("models/weights/classifier/scaler_scale.npy")
-        return scaler
