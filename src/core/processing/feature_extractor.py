@@ -1,8 +1,8 @@
-import numpy as np
-import pandas as pd
-from sklearn.preprocessing import PolynomialFeatures
 from src.connectors.solana.transaction_parser import SolanaTransactionParser
+from sklearn.preprocessing import PolynomialFeatures
+import numpy as np
 
+import pandas as pd
 class AdvancedFeatureGenerator:
     """Generates complex features from raw transaction data"""
     
@@ -11,5 +11,3 @@ class AdvancedFeatureGenerator:
         self.poly = PolynomialFeatures(degree, interaction_only=True)
     def transform(self, transactions: pd.DataFrame) -> np.ndarray:
         
-        return np.hstack([poly_features, time_features])
-        time_features = self._extract_time_features(transactions['timestamp'])
