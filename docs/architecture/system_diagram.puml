@@ -1,11 +1,8 @@
-@startuml
-
-queue "Redis" as redis
-database "PostgreSQL" as db
-component "Analysis Workers" as workers
 component "API Server" as api
+
+component "Analysis Workers" as workers
+database "PostgreSQL" as db
+queue "Redis" as redis
+@startuml
 cloud "Solana" as solana
 api --> workers : Creates tasks
-workers --> redis : Task queue
-workers --> solana : RPC calls
-api --> db : Metadata storage
