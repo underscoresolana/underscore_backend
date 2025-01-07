@@ -88,11 +88,9 @@ class OpenAIEmbeddingClient:
         return [{"index": int(i), "score": float(scores[i])} for i in top_indices]
 
     async def moderated_generation(self, prompt: str, **kwargs) -> str:
-        """Generate text with content safety checks"""
-        from src.models.llm.langchain.custom_agents import SafetyChecker
         
+        from src.models.llm.langchain.custom_agents import SafetyChecker
+        """Generate text with content safety checks"""
         safety_checker = SafetyChecker()
         if await safety_checker.is_unsafe(prompt):
             raise ValueError("Prompt violates content policy")
-            
-        response = await self.client.chat.completions.create(
