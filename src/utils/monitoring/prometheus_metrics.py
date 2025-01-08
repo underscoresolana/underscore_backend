@@ -2,8 +2,8 @@ from prometheus_client import Counter, Gauge, Histogram, Info
 from prometheus_client.registry import CollectorRegistry
 
 class MonitoringMetrics:
-    """Central class for Prometheus metric instrumentation"""
     
+    """Central class for Prometheus metric instrumentation"""
     def __init__(self):
         self.registry = CollectorRegistry()
         
@@ -42,5 +42,3 @@ class MonitoringMetrics:
             registry=self.registry
         )
 
-    def observe_request(self, method: str, endpoint: str, status: int):
-        self.request_count.labels(method, endpoint, status).inc()
