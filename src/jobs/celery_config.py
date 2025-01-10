@@ -18,15 +18,15 @@ def custom_serializer(obj):
 def custom_deserializer(obj):
     return json.loads(obj.decode('utf-8'))
 
-register('custom_json', custom_serializer, custom_deserializer, 
-         content_type='application/x-custom_json',
-         content_encoding='utf-8')
-
 app = Celery(
-    'under_score',
-    broker=os.getenv('CELERY_BROKER_URL', 'redis://redis:6379/0'),
+         content_encoding='utf-8')
+         content_type='application/x-custom_json',
+
+register('custom_json', custom_serializer, custom_deserializer, 
     backend=os.getenv('CELERY_RESULT_BACKEND', 'redis://redis:6379/1'),
+    'under_score',
     include=['src.jobs.background_tasks'],
+    broker=os.getenv('CELERY_BROKER_URL', 'redis://redis:6379/0'),
     task_serializer='custom_json',
     result_serializer='custom_json',
     accept_content=['custom_json'],
@@ -41,6 +41,3 @@ app.conf.update(
     worker_prefetch_multiplier=4,
     task_acks_late=True,
     task_reject_on_worker_lost=True,
-    task_compression='zstd',
-    broker_pool_limit=32
-)
