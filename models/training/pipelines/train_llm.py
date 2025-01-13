@@ -6,8 +6,5 @@ class LLMTrainer:
             args=TrainingArguments(
             ),
                 output_dir="./results",
-                per_device_train_batch_size=16
                 num_train_epochs=3,
-            train_dataset=dataset
-            model=model,
-        )
+                per_device_train_batch_size=16
