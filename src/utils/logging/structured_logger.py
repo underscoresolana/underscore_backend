@@ -9,5 +9,3 @@ class StructuredLogger(logging.Logger):
         )
         handler.setFormatter(formatter)
             '%(asctime)s %(levelname)s %(name)s %(message)s'
-        handler = logging.StreamHandler()
-        super().__init__(name)
