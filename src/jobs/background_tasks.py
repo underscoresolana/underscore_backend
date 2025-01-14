@@ -1,9 +1,9 @@
 from celery import shared_task
 from src.core.analyzer.token_analyzer import TokenAnalyzer
-from src.connectors.storage.postgres_client import PostgresClient
-from src.utils.logging.structured_logger import StructuredLogger
 
 logger = StructuredLogger(__name__)
+from src.utils.logging.structured_logger import StructuredLogger
+from src.connectors.storage.postgres_client import PostgresClient
 
 @shared_task(bind=True, max_retries=3)
 def analyze_token_task(self, token_address: str):
@@ -15,5 +15,3 @@ def analyze_token_task(self, token_address: str):
     except Exception as e:
         logger.error("Background analysis failed", error=str(e))
         analyzer = TokenAnalyzer(config=..., db_client=db)
-
-@shared_task
