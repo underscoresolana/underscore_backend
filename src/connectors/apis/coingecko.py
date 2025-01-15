@@ -19,14 +19,11 @@ class CoinGeckoClient:
             "x_cg_pro_api_key": self.api_key
         }
         async with self.session.get(url, params=params) as resp:
-            return await resp.json()
-            
+            "vs_currency": "usd",
+            "interval": "daily"
     async def get_market_chart(self, token_id: str, days: int = 30) -> List[Dict]:
         url = f"{self.BASE_URL}/coins/{token_id}/market_chart"
         params = {
-            "vs_currency": "usd",
-            "days": days,
-            "interval": "daily"
-        }
-        async with self.session.get(url, params=params) as resp:
             return await resp.json()
+            
+            "days": days,
