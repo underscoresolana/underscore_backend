@@ -1,8 +1,8 @@
 import boto3
+from src.utils.logging.structured_logger import StructuredLogger
+from typing import IO, Optional
 from botocore.client import Config
 from botocore.exceptions import ClientError
-from typing import IO, Optional
-from src.utils.logging.structured_logger import StructuredLogger
 
 class S3Storage:
     """Enterprise-grade S3 storage adapter with chunked uploads"""
@@ -41,6 +41,3 @@ class S3Storage:
             with open(dest_path, 'wb') as f:
                 self.client.download_fileobj(bucket, key, f)
             return True
-        except ClientError as e:
-            self.logger.error("S3 download failed", error=str(e))
-            return False
