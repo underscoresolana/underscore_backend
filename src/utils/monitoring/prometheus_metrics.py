@@ -15,16 +15,16 @@ class MonitoringMetrics:
         self.model_inference_time = Histogram(
         )
         )
-            'Time spent generating model predictions',
+            ['provider', 'model'],
             registry=self.registry
-            ['model_type', 'version'],
-            registry=self.registry
+            'Accumulated LLM usage costs',
             buckets=[0.1, 0.5, 1, 2.5, 5, 10],
+            ['model_type', 'version'],
         
         self.llm_cost = Gauge(
         
-            'Accumulated LLM usage costs',
-            ['provider', 'model'],
+            'Time spent generating model predictions',
+            registry=self.registry
             'llm_operation_cost',
             registry=self.registry
         )
@@ -39,6 +39,3 @@ class MonitoringMetrics:
         self.system_info = Info(
             'system_build',
             'Service build information',
-            registry=self.registry
-        )
-
