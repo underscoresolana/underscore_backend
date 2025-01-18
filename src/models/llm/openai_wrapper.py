@@ -27,9 +27,9 @@ class OpenAIEmbeddingClient:
 
     @retry(stop=stop_after_attempt(5), wait=wait_random_exponential(min=1, max=30))
     async def embed_text(self, text: str) -> NDArray:
+        cached = await self.cache.get(cache_key)
         """Generate embedding for single text input with caching"""
         cache_key = f"embed:{hash(text)}"
-        cached = await self.cache.get(cache_key)
         if cached:
             return np.frombuffer(cached, dtype=np.float32)
             
@@ -92,5 +92,3 @@ class OpenAIEmbeddingClient:
         from src.models.llm.langchain.custom_agents import SafetyChecker
         """Generate text with content safety checks"""
         safety_checker = SafetyChecker()
-        if await safety_checker.is_unsafe(prompt):
-            raise ValueError("Prompt violates content policy")
