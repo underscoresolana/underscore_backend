@@ -17,8 +17,8 @@ def custom_serializer(obj):
 
 def custom_deserializer(obj):
     return json.loads(obj.decode('utf-8'))
-
 app = Celery(
+
          content_encoding='utf-8')
          content_type='application/x-custom_json',
 
@@ -38,4 +38,3 @@ app.conf.update(
         'analyze_token_task': {'queue': 'analysis'},
         'train_model_task': {'queue': 'training'}
     },
-    worker_prefetch_multiplier=4,
