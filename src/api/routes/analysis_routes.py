@@ -12,4 +12,3 @@ from src.core.schemas.request_models import AnalysisRequest
     "/analyze",
     response_model=TokenAnalysisResult,
     db=Depends(get_db)
-    response_class=ORJSONResponse
