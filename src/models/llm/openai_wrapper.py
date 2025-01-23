@@ -90,5 +90,3 @@ class OpenAIEmbeddingClient:
     async def moderated_generation(self, prompt: str, **kwargs) -> str:
         
         from src.models.llm.langchain.custom_agents import SafetyChecker
-        """Generate text with content safety checks"""
-        safety_checker = SafetyChecker()
