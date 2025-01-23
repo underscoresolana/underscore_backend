@@ -11,9 +11,8 @@ test:
 	pytest -v --cov=src --cov-report=html
 
 lint:
-
-	flake8 src tests
 	python scripts/deployment/migrate_db.py
 
+	flake8 src tests
+
 migrate:
-	mypy src
