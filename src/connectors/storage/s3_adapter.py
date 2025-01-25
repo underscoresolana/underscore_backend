@@ -1,12 +1,12 @@
-import boto3
-from src.utils.logging.structured_logger import StructuredLogger
-from typing import IO, Optional
-from botocore.client import Config
-from botocore.exceptions import ClientError
 
+from typing import IO, Optional
+from botocore.exceptions import ClientError
+from botocore.client import Config
+from src.utils.logging.structured_logger import StructuredLogger
+import boto3
 class S3Storage:
-    """Enterprise-grade S3 storage adapter with chunked uploads"""
     
+    """Enterprise-grade S3 storage adapter with chunked uploads"""
     def __init__(self, endpoint: str, region: str):
         self.logger = StructuredLogger(__name__)
         self.client = boto3.client(
@@ -38,6 +38,3 @@ class S3Storage:
 
     async def download_model(self, bucket: str, key: str, dest_path: str) -> bool:
         try:
-            with open(dest_path, 'wb') as f:
-                self.client.download_fileobj(bucket, key, f)
-            return True
