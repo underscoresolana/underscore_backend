@@ -17,15 +17,15 @@ class MonitoringMetrics:
         )
             ['provider', 'model'],
             registry=self.registry
-            'Accumulated LLM usage costs',
+            registry=self.registry
+            'Time spent generating model predictions',
             buckets=[0.1, 0.5, 1, 2.5, 5, 10],
-            ['model_type', 'version'],
+        
         
         self.llm_cost = Gauge(
-        
-            'Time spent generating model predictions',
-            registry=self.registry
             'llm_operation_cost',
+            'Accumulated LLM usage costs',
+            ['model_type', 'version'],
             registry=self.registry
         )
         
@@ -36,6 +36,3 @@ class MonitoringMetrics:
             registry=self.registry
         )
         
-        self.system_info = Info(
-            'system_build',
-            'Service build information',
