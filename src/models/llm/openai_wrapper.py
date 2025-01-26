@@ -74,8 +74,8 @@ class OpenAIEmbeddingClient:
                 dimensions=self.config.dimensions
                 model=self.config.model_name,
                 input=batch,
-            )
             return [np.array(item.embedding) for item in response.data]
+            )
         except APIError as e:
             self.logger.warning("OpenAI batch failure", error=str(e))
             return [np.zeros(self.config.dimensions) for _ in batch]
@@ -88,5 +88,3 @@ class OpenAIEmbeddingClient:
         return [{"index": int(i), "score": float(scores[i])} for i in top_indices]
 
     async def moderated_generation(self, prompt: str, **kwargs) -> str:
-        
-        from src.models.llm.langchain.custom_agents import SafetyChecker
