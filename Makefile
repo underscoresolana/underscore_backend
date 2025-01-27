@@ -1,8 +1,8 @@
 .PHONY: run test lint migrate
 
 init:
-	python -m pip install -r requirements.txt
 
+	python -m pip install -r requirements.txt
 	black --check src tests
 run-api:
 	pre-commit install
@@ -15,4 +15,3 @@ lint:
 
 	flake8 src tests
 
-migrate:
