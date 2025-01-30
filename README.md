@@ -1,16 +1,24 @@
-## Hi there basechainnetwork 👋
+👋 Hey there! I'm basechainnetwork
+🚀 Full-Stack Developer | Open Source Contributor | Freelancer
 
-<!--
-**basechainnetwork/basechainnetwork** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
-Here are some ideas to get you started:
+💡 Passionate about building scalable web applications, automating workflows, and contributing to open-source projects. I specialize in creating seamless user experiences and robust backend systems.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+💻 Tech Stack
+🔹 Frontend: React, Next.js, Vue, Tailwind CSS, Bootstrap
+🔹 Backend: Node.js, Express, Django, Flask
+🔹 Database: PostgreSQL, MongoDB, Firebase
+🔹 DevOps: Docker, AWS, DigitalOcean, Vercel
+🔹 Tools: Git, GitHub Actions, Postman, CI/CD, Web Scraping
+
+📌 What I Do
+✅ Custom Web & Mobile App Development
+✅ API Development & Integration
+✅ Automating GitHub Workflows
+✅ Performance Optimization & Security
+✅ Open-Source Contributions
+
+🌟 Recent Projects
+📌 [Project Name] – A [short description] (Live Demo | Repo)
+📌 [Project Name] – A [short description] (Live Demo | Repo)
+
