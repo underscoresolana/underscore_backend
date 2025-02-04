@@ -1,0 +1,23 @@
+name: CI/CD Pipeline
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: codecov/codecov-action@v3
+      - run: |
+        with:
+          python-version: '3.11'
+      - uses: actions/checkout@v4
+          pytest -v --cov=src --cov-report=xml
+          pip install -r requirements.txt
+      - uses: actions/setup-python@v4
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and push
+        uses: docker/build-push-action@v4
