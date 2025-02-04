@@ -1,0 +1,2 @@
+{"block": 123456, "signers": ["A1b2C3...", "XyZ9..."], "value": 1.25, "memo": "Token swap", "metadata": {"token": "USDC", "amount": 1500}}
+{"block": 123457, "signers": ["D4e5F6..."], "value": 0.42, "memo": "NFT mint", "metadata": {"collection": "UnderScore", "mint_count": 2500}}

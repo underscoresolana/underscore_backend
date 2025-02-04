@@ -1,0 +1,48 @@
+model:
+  name: gpt-4-turbo
+  max_tokens: 4096
+  temperature: 0.7
+  top_p: 0.9
+  presence_penalty: 0.1
+  frequency_penalty: 0.1
+
+training:
+  batch_size: 32
+  learning_rate: 2e-5
+  epochs: 3
+  warmup_steps: 500
+  gradient_accumulation: 4
+  weight_decay: 0.01
+
+data:
+  train_path: data/train.jsonl
+  eval_path: data/eval.jsonl
+  test_path: data/test.jsonl
+  max_seq_length: 512
+  num_workers: 4
+
+inference:
+  batch_size: 16
+  max_new_tokens: 256
+  num_beams: 4
+  length_penalty: 1.0
+  repetition_penalty: 1.2
+
+logging:
+  log_level: INFO
+  log_interval: 100
+  eval_interval: 1000
+  save_interval: 5000
+  tensorboard_dir: logs/runs
+
+paths:
+  model_dir: models/checkpoints
+  cache_dir: .cache
+  output_dir: outputs
+  data_dir: data
+
+resources:
+  num_gpus: 4
+  mixed_precision: fp16
+  gradient_checkpointing: true
+  cpu_offload: false

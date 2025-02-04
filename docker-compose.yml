@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: deployments/docker/app.Dockerfile
+    ports:
+      - redis_data:/data
+    env_file:
+      context: .
+    depends_on:
+      - "8000:8000"
+      dockerfile: deployments/docker/worker.Dockerfile
+
+  worker:
+    build:
+      - redis
+      - redis
+    command: celery -A src.jobs.celery_config.app worker -Q analysis,training -P gevent
+    env_file:
+      - configs/env/dev.env
+    depends_on:
+      - postgres
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - configs/env/dev.env
+    volumes:
+      - "6379:6379"
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: under_score
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: devpassword
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+

@@ -1,0 +1,12 @@
+**/.git
+**/.mypy_cache
+**/__pycache__
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.env
+.venv
+node_modules
+models/weights/**/*.bin
+tests/
