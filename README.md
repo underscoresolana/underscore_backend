@@ -24,7 +24,7 @@
 UNDER_SCORE is an tool leveraging autonomous web agents, quantitative pricing models and reasoning language models to deliver the most intricate analytical insights on Solana.
 The product is under active development with alpha release scheduled in Feb 2025. This repository contains backend code for UNDER_SCORE web application.
 
-<img src="https://i.postimg.cc/q7f6xfQ4/scory-removebg-preview.png" alt="drawing" width="100"/>  $hi\ sers$
+<img src="https://i.postimg.cc/q7f6xfQ4/scory-removebg-preview.png" alt="drawing" width="100"/>  `> gm `
 
 ---
 
