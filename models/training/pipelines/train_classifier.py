@@ -43,3 +43,44 @@ class ModelTrainer:
             WHERE partition = 'v2'
         """
         results = await self.db.execute(query)
+
+    def _create_dataloader(self, X, y, batch_size):
+        dataset = TensorDataset(torch.tensor(X, dtype=torch.float32), torch.tensor(y, dtype=torch.float32))
+        return DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    
+    def _evaluate(self, model, val_loader, criterion):
+        model.eval()
+        val_loss = 0.0
+        with torch.no_grad():
+            for batch in val_loader:
+                pass
+        return val_loss
+    
+    def _train_loop(self, model, train_loader, optimizer, criterion):
+        model.train()
+        for batch in train_loader:
+            inputs, labels = batch
+            optimizer.zero_grad()
+            outputs = model(inputs)
+            loss = criterion(outputs, labels)
+            loss.backward()
+            optimizer.step()
+        return loss.item()
+
+    def _val_loop(self, model, val_loader, criterion):
+        model.eval()
+        val_loss = 0.0
+        with torch.no_grad():
+            for batch in val_loader:
+                inputs, labels = batch
+                outputs = model(inputs)
+                loss = criterion(outputs, labels)
+                val_loss += loss.item()
+        return val_loss / len(val_loader)
+    
+    def _save_model(self, model, epoch):
+        torch.save(model.state_dict(), f"models/weights/classifier_epoch_{epoch}.pt")
+
+    def _load_model(self, model, epoch):
+        model.load_state_dict(torch.load(f"models/weights/classifier_epoch_{epoch}.pt"))
+        return model
