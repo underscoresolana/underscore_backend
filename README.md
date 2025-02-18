@@ -1,11 +1,11 @@
 <div align="center">
    <img src="https://github.com/underscoresolana/underscore_backend/blob/release/banner.png" alt="drawing" width="1200"/>
 
-   _An AI and data-powered web3 analysis powerhouse._
+   _An AI and data-powered web3 analysis powerhouse. Try our [Price Dynamics Dashboard](https://app.underscorelabs.dev/)._
    
    [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/yourusername/under__score/actions)
    [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-   [![Visit My Website](https://img.shields.io/badge/Website-Visit-blue.svg)](https://courageous-slider-249938.framer.app)
+   [![Visit My Website](https://img.shields.io/badge/Website-Visit-blue.svg)](https://underscorelabs.dev/)
    [![X](https://img.shields.io/badge/Twitter-@underscore_labs-1DA1F2.svg)](https://x.com/underscore_labs)
 
 </div>
@@ -101,4 +101,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 <img src="https://i.postimg.cc/K8jDHynT/photo-2025-02-04-00-21-50.jpg" alt="drawing" width="1000"/>
 
-Contact us at earl@underscorelabs.io for any inquiries.
+Contact us at earl@underscorelabs.dev for any inquiries.
