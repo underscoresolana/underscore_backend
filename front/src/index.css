@@ -1,0 +1,327 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 243 75% 59%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 80%;
+
+    --radius: 0.75rem;
+    
+    /* Custom gradient variables with more vibrant colors */
+    --gradient-start: #000000;
+    --gradient-mid1: #253a59;  /* Enhanced blue */
+    --gradient-mid2: #4a3a32;  /* Enhanced brown */
+    --gradient-mid3: #3d2a4a;  /* Enhanced purple */
+    --gradient-mid4: #002a3d;  /* Enhanced teal */
+    --gradient-end: #000000;
+    
+    /* Title gradient colors */
+    --title-color-center: #44D7EB;
+    --title-color-1: #FF8863;
+    --title-color-2: #8FFFD8;
+    --title-color-3: #DCC4FF;
+    --title-color-4: #CDFFF3;
+    --title-color-outer: #FFFFFF;
+    
+    /* Market highlight color */
+    --market-highlight: #0000FF;
+    
+    /* Accent color - derived from the gradient */
+    --accent-color-1: #44D7EB;
+    --accent-color-2: #8FFFD8;
+    
+    /* Header height */
+    --header-height: 72px;
+    
+    /* Font families */
+    --font-inter: 'Inter', sans-serif;
+    --font-switzer: 'Switzer', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    /* Animations */
+    --transition-slow: 0.5s;
+    --transition-medium: 0.3s;
+    --transition-fast: 0.15s;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 243 75% 59%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 80%;
+  }
+}
+
+/* Gradient animation for holographic effect */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Soft fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulse animation for hover states */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@layer base {
+  /* Ensure html and root elements are black */
+  html, #root {
+    background-color: #000000;
+  }
+
+  * {
+    @apply border-border font-normal;
+    font-family: var(--font-inter);
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Pure black background */
+    background-color: #000000;
+    position: relative;
+    min-height: 100vh;
+    padding-top: var(--header-height);
+    font-family: var(--font-inter);
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+  }
+  
+  /* Gradient overlay using pseudo-element */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.6; /* Increased to 60% opacity for better visibility */
+    background: radial-gradient(
+      circle at bottom right, 
+      var(--gradient-mid1) 0%,
+      var(--gradient-mid2) 30%,
+      var(--gradient-mid3) 60%,
+      var(--gradient-mid4) 80%,
+      var(--gradient-start) 100%
+    );
+    background-size: 200% 200%; /* Larger gradient for more impact */
+    background-position: bottom right;
+    pointer-events: none;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium;
+    font-family: var(--font-inter);
+    letter-spacing: -0.03em;
+  }
+  
+  p, span, div, button, input {
+    @apply font-normal;
+    font-family: var(--font-inter);
+    line-height: 1.6;
+  }
+  
+  /* Font classes */
+  .font-inter {
+    font-family: var(--font-inter);
+  }
+  
+  .font-switzer {
+    font-family: var(--font-switzer);
+  }
+  
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  /* Transitions */
+  .transition-all {
+    transition: all var(--transition-medium) ease;
+  }
+
+  .transition-fast {
+    transition: all var(--transition-fast) ease;
+  }
+
+  .transition-slow {
+    transition: all var(--transition-slow) ease;
+  }
+  
+  /* Title with gradient */
+  .title-gradient {
+    color: white;
+    background: radial-gradient(
+      ellipse 55% 40% at center bottom,
+      var(--title-color-center) 0%,
+      var(--title-color-1) 20%,
+      var(--title-color-2) 40%,
+      var(--title-color-3) 60%,
+      var(--title-color-4) 80%,
+      var(--title-color-outer) 100%
+    );
+    background-size: 60% 200%;
+    background-position: center bottom;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease forwards;
+  }
+}
+
+@layer components {
+  .market-card {
+    @apply bg-black/70 shadow-[0_4px_15px_rgba(0,0,0,0.1)] border border-white/10 p-4 backdrop-blur-md rounded-none;
+    @apply transition-all hover:shadow-[0_8px_25px_rgba(0,0,0,0.2)];
+  }
+  
+  .trend-positive {
+    @apply text-[var(--accent-color-2)];
+  }
+  
+  .trend-negative {
+    @apply text-negative;
+  }
+  
+  .token-row {
+    @apply flex items-center py-3 border-b border-white/10 last:border-0 transition-colors duration-200 hover:bg-black/40;
+  }
+  
+  .nav-link {
+    @apply rounded-none py-2 px-6 bg-black/70 hover:bg-black/80 transition-colors backdrop-blur-md relative overflow-hidden;
+    @apply after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 
+           after:bg-[var(--accent-color-1)] after:transition-all after:duration-300;
+    @apply hover:after:w-full;
+  }
+  
+  .nav-link-active {
+    @apply bg-black/80 after:w-full;
+  }
+  
+  .glass-effect {
+    @apply bg-black/70 backdrop-blur-md rounded-none;
+  }
+  
+  /* Global UI block rounding */
+  .rounded-ui {
+    @apply rounded-none;
+  }
+  
+  /* Apply consistent styling to common UI elements */
+  button, 
+  input, 
+  select, 
+  textarea,
+  .dropdown-content,
+  .popover-content,
+  .dialog-content,
+  .card,
+  .alert,
+  .toast,
+  .tooltip {
+    @apply rounded-none transition-all;
+  }
+  
+  /* Interactive elements hover effect */
+  button:not([disabled]),
+  a:not([aria-disabled="true"]) {
+    @apply hover:translate-y-[-1px] active:translate-y-[1px] transition-transform;
+  }
+  
+  /* Header rounding */
+  header {
+    @apply rounded-none;
+  }
+  
+  /* Footer rounding */
+  footer {
+    @apply rounded-none;
+  }
+
+  /* Badge style */
+  .badge {
+    @apply inline-flex items-center bg-black/50 border border-white/10 px-2 py-0.5 text-xs;
+    @apply backdrop-blur-md transition-colors hover:bg-black/70;
+  }
+  
+  /* Accent border */
+  .accent-border {
+    @apply border border-[var(--accent-color-1)] shadow-[0_0_15px_rgba(68,215,235,0.3)];
+  }
+  
+  /* Skeleton loader */
+  .skeleton {
+    @apply bg-white/5 animate-pulse rounded-none;
+  }
+}
