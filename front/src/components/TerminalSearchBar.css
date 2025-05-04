@@ -1,0 +1,46 @@
+/* Terminal container styling */
+.terminal-container {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Terminal body styling */
+.terminal-body {
+  border-radius: 0; /* Ensure no rounding that would affect the inner stroke */
+}
+
+/* Terminal cursor animation */
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background-color: #4ade80;
+  animation: blink 1s step-end infinite;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Terminal input styling */
+.terminal-input {
+  caret-color: transparent; /* Hide the default cursor */
+}
+
+.terminal-input::placeholder {
+  color: rgba(74, 222, 128, 0.5); /* Green with reduced opacity */
+}
+
+/* Fade-in animation for search results */
+.fade-in {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+} 
